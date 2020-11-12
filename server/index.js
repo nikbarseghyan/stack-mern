@@ -7,7 +7,6 @@ import postRouter from './router/post.js'
 
 const app = express()
 
-
 app.use(bodyParser.json({limit: '22mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '22mb', extended: true}))
 app.use(cors())
