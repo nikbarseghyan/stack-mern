@@ -1,11 +1,28 @@
 import * as service from '../service'
-import {FETCH_ALL} from '../configs/constants.js'
+import {FETCH_ALL, CREATE, UPDATE} from '../configs/constants.js'
 
 export const getPost = () => async (dispatch) => {
-    try {
-        const {data} = await service.fetchPost();
-        dispatch({ type: FETCH_ALL, payload: data});
-    } catch (err) {
-        console.log(err.message)
+        try {
+            const {data} = await service.fetchPost();
+            dispatch({ type: FETCH_ALL, payload: data});
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    createPost = post => async (dispatch) => {
+        try {
+            const {data} = await service.createPost(post);
+            dispatch({ type: CREATE, payload: data});
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    updatePost = (id, post) => async (dispatch) => {
+        try {
+            const {data} = await service.updatePost(id, post);
+
+            dispatch({type: UPDATE, payload: data})
+        } catch (err) {
+            console.log(err)
+        }
     }
-}
