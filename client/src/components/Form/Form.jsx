@@ -1,13 +1,19 @@
 import React, {useState} from 'react'
 import FileBase from 'react-file-base64'
 import {TextField, Button, Typography, Paper} from '@material-ui/core'
+import {useDispatch} from 'react-redux' 
 import useStyle from './style.cfg.js'
+import {createPost} from '../../actions/post.js'
 
 export const Form = () => {
     const [postData, setpostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' }),
         classes = useStyle(),
+        dispatch = useDispatch(),
         handleClear = () => {},
-        handleSubmit = () => {};
+        handleSubmit = ev => {
+            ev.preventDefault();
+            dispatch(createPost(postData))
+        };
 
     return (
         <Paper className={classes.paper}>

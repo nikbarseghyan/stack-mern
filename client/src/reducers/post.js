@@ -5,7 +5,7 @@ export const post = (post = [], action) => {
         case FETCH_ALL:
             return action.payload;
         case CREATE:
-            return post;
+            return [ ...post, action.payload ];
         default:
             return post;
     }
