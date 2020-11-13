@@ -1,24 +1,34 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import FileBase from 'react-file-base64'
 import {TextField, Button, Typography, Paper} from '@material-ui/core'
-import {useDispatch} from 'react-redux' 
+import {useDispatch, useSelector} from 'react-redux'
 import useStyle from './style.cfg.js'
-import {createPost} from '../../actions/post.js'
+import {createPost, updatePost} from '../../actions/post.js'
 
-export const Form = () => {
+export const Form = ({currentId, setCurrentId}) => {
     const [postData, setpostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' }),
         classes = useStyle(),
         dispatch = useDispatch(),
-        handleClear = () => {},
+        handleClear = () => {
+            setCurrentId(null);
+            setpostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+        },
         handleSubmit = ev => {
             ev.preventDefault();
-            dispatch(createPost(postData))
-        };
+            currentId ? dispatch(updatePost(currentId, postData)) : dispatch(createPost(postData)); 
+
+            handleClear();
+        },
+        post = useSelector(state => currentId ? state.post.find(i => i._id === currentId) : null);
+
+    useEffect(() => {
+        if(post) setpostData(post)
+    }, [post]);
 
     return (
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant='h6'>Creating a Mario </Typography>
+                <Typography variant='h6'> {currentId ? 'Editing' : 'Creating'} memory </Typography>
                 <TextField name='creator' variant='outlined' label='Creator' fullWidth value={postData.creator} onChange={ev => setpostData({...postData, creator: ev.target.value})}/>
                 <TextField name='title' variant='outlined' label='Title' fullWidth value={postData.title} onChange={ev => setpostData({...postData, title: ev.target.value})}/>
                 <TextField name='message' variant='outlined' label='Message' fullWidth value={postData.message} onChange={ev => setpostData({...postData, message: ev.target.value})}/>

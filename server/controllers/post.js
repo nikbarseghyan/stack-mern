@@ -4,7 +4,6 @@ import {PostModel} from '../models/postModel.js'
 export const getPost = async (req, res) => {
         try {
             const postModel = await PostModel.find();
-            console.log('>>>>>>>', postModel);
             res.status(200).json(postModel);
         } catch (err) {
             res.status(404).json({message: err.message});
@@ -27,7 +26,7 @@ export const getPost = async (req, res) => {
 
         if(!mongoose.Type.ObjecId.isValid(_id)) res.status(404).send(`No Post id`);
 
-        const updatePost = await PostModel.findByIdAndUpdate(_id, post, {new: true} );
+        const updatePost = await PostModel.findByIdAndUpdate(_id, {...post, _id }, {new: true} );
 
         res.json(updatePost)
     }
