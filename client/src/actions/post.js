@@ -1,5 +1,5 @@
 import * as service from '../service'
-import {FETCH_ALL, CREATE, UPDATE, DELETE} from '../configs/constants.js'
+import {FETCH_ALL, CREATE, UPDATE, DELETE, LIKE} from '../configs/constants.js'
 
 export const getPost = () => async (dispatch) => {
         try {
@@ -26,12 +26,21 @@ export const getPost = () => async (dispatch) => {
             console.log(err)
         }
     },
-    deletePost = (id) => async (dispatch) => {
+    deletePost = id => async (dispatch) => {
         try {
             await service.deletePost(id);
 
             dispatch({type: DELETE, payload: id});
 
+        } catch (err) {
+            console.log(err)
+        }
+    },
+    likePost = id => async (dispatch) => {
+        try {
+            const {data} = await service.likePost(id);
+
+            dispatch({type: LIKE, payload: data})
         } catch (err) {
             console.log(err)
         }
