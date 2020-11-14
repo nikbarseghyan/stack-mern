@@ -12,7 +12,7 @@ export const Posts = ({setCurrentId}) => {
         !post.length ? <CircularProgress /> : (
             <Grid className={classes.container} container alignItems='stretch' spacing={3}>
                 {post.map(post => (
-                    <Grid key={post._id} items xs={12} sm={6}> 
+                    <Grid key={post._id} item xs={12} sm={6}> 
                         <Post post={post} setCurrentId={setCurrentId} />
                     </Grid>
                 ))}

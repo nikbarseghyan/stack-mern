@@ -6,12 +6,12 @@ import useStyle from './style.cfg.js'
 import {createPost, updatePost} from '../../actions/post.js'
 
 export const Form = ({currentId, setCurrentId}) => {
-    const [postData, setpostData] = useState({ creator: '', title: '', message: '', tags: '', selectedFile: '' }),
+    const [postData, setpostData] = useState({ creator: '', title: '', message: '', tags: '', selectFile: '' }),
         classes = useStyle(),
         dispatch = useDispatch(),
         handleClear = () => {
             setCurrentId(null);
-            setpostData({ creator: '', title: '', message: '', tags: '', selectedFile: '' });
+            setpostData({ creator: '', title: '', message: '', tags: '', selectFile: '' });
         },
         handleSubmit = ev => {
             ev.preventDefault();
@@ -34,7 +34,7 @@ export const Form = ({currentId, setCurrentId}) => {
                 <TextField name='message' variant='outlined' label='Message' fullWidth value={postData.message} onChange={ev => setpostData({...postData, message: ev.target.value})}/>
                 <TextField name='tags' variant='outlined' label='Tags' fullWidth value={postData.tags} onChange={ev => setpostData({...postData, tags: ev.target.value})}/>
                 <div className={classes.fileInput}>
-                    <FileBase type='file' multiple={false} onDone={({base64})=>setpostData({...postData, selectedFile: base64})} />
+                    <FileBase type='file' multiple={false} onDone={({base64})=>setpostData({...postData, selectFile: base64})} />
                 </div>
                 <Button className={classes.buttonSubmit} variant='contained' color='primary' size='small' type='submit' fullWidth> Submit </Button>
                 <Button className={classes.buttonSubmit} variant='contained' color='secondary' size='small' onClick={handleClear} fullWidth> Clear </Button>
