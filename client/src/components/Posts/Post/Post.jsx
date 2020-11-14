@@ -6,19 +6,15 @@ import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt'
 import DeleteIcon from '@material-ui/icons/Delete'
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz'
 import useStyle from './style.cfg.js'
-import {deletePost} from '../../../actions/post.js'
+import {deletePost, likePost} from '../../../actions/post.js'
 
 export const Post = ({post, setCurrentId}) => {
     const classes = useStyle(),
-        handleBtnCLick = () => setCurrentId(post._id),
         dispatch = useDispatch(),
-        handleDelete = () => {
-            console.log('>>>>>', post._id);
-            dispatch(deletePost(post._id))
-        }
-        const handleLike = () => {
-            console.log('LIKE>>>>>')
-        }
+        handleBtnCLick = () => setCurrentId(post._id),
+        handleDelete = () => dispatch(deletePost(post._id)),
+        handleLike = () => dispatch(likePost(post._id));
+
     return (
         <Card className={classes.card}>
             <CardMedia className={classes.media} image={`${post.selectFile}`} title={post.title} />
@@ -32,21 +28,21 @@ export const Post = ({post, setCurrentId}) => {
                 </Button>
             </div>
             <div className={classes.details}>
-                <Typography variant='body2' color='textSecondary'>{post.tegs.map((tag) => `#${tag} ` )}</Typography>
+                <Typography variant='body2' color='textSecondary'>{post.tegs.map(tag => `#${tag} ` )}</Typography>
             </div>
             <Typography className={classes.title} variant='h5' gutterBottom >{post.title}</Typography>
             <CardContent>
-                <Typography variant='h5' gutterBottom >{post.message}</Typography>
+                <Typography variant='body2' color='textSecondary' component='p' >{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
                 <Button color='primary' size='small' onClick={handleLike} >
                     <ThumbUpAltIcon fontSize='default' />
-                    Like
+                    &nbsp; Like &nbsp;
                     {post.likeCount}
                 </Button>
                 <Button color='primary' size='small' onClick={handleDelete} >
                     <DeleteIcon fontSize='default' />
-                    Delete
+                    &nbsp; Delete
                 </Button>
             </CardActions>
         </Card>
