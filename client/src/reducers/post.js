@@ -1,7 +1,9 @@
-import {FETCH_ALL, CREATE, UPDATE} from '../configs/constants.js'
+import {FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from '../configs/constants.js'
 
 export const post = (post = [], action) => {
     switch(action.type) {
+        case DELETE:
+            return post.filter(post => post.id !== action.payload);
         case FETCH_ALL:
             return action.payload;
         case CREATE:
