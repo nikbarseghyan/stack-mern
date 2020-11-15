@@ -22,14 +22,14 @@ export const Form = ({currentId, setCurrentId}) => {
         handleChangeCreator = ev => setpostData({...postData, creator: ev.target.value}),
         handleChangeTitle = ev => setpostData({...postData, title: ev.target.value}),
         handleChangeMessage = ev => setpostData({...postData, message: ev.target.value}),
-        handleChangeTegs = ev => setpostData({...postData, tegs: ev.target.value.split(', ') });
+        handleChangeTegs = ev => setpostData({...postData, tegs: ev.target.value.split(',') });
 
-    useEffect(() => { if(post) setpostData(post) }, [post]);
+    useEffect(() => { if(post) return setpostData(post) }, [post]);
 
     return (
         <Paper className={classes.paper}>
             <form autoComplete='off' noValidate className={`${classes.root} ${classes.form}`} onSubmit={handleSubmit}>
-                <Typography variant='h6'> {currentId ? 'Editing' : 'Creating'} memory </Typography>
+                <Typography variant='h6'> {currentId ? 'Editing' : 'Creating'} </Typography>
                 <TextField name='creator' variant='outlined' label='Creator' fullWidth value={postData.creator} onChange={handleChangeCreator}/>
                 <TextField name='title' variant='outlined' label='Title' fullWidth value={postData.title} onChange={handleChangeTitle}/>
                 <TextField name='message' variant='outlined' label='Message' fullWidth value={postData.message} onChange={handleChangeMessage}/>
@@ -37,7 +37,7 @@ export const Form = ({currentId, setCurrentId}) => {
                 <div className={classes.fileInput}>
                     <FileBase type='file' multiple={false} onDone={({base64})=>setpostData({...postData, selectFile: base64})} />
                 </div>
-                <Button className={classes.buttonSubmit} variant='contained' color='primary' size='small' type='submit' fullWidth> Submit </Button>
+                <Button className={classes.buttonSubmit} variant='contained' color='primary' size='small' type='submit'> Submit </Button>
                 <Button className={classes.buttonSubmit} variant='contained' color='secondary' size='small' onClick={handleClear} fullWidth> Clear </Button>
             </form>
         </Paper>
