@@ -24,3 +24,10 @@ $ yarn run test
 $ yarn run eject
 ```
 <hr/>
+
+## Deploy
+
+[Heroku Deploy Server](https://cr-task.herokuapp.com/)
+[Netlify Deploy Client](https://5fb18b89f58291ff4f799176--cr-task.netlify.app/)
+
+
