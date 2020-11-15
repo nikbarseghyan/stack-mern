@@ -12,12 +12,14 @@ export const Post = ({post, setCurrentId}) => {
     const classes = useStyle(),
         dispatch = useDispatch(),
         handleBtnCLick = () => setCurrentId(post._id),
-        handleDelete = () => dispatch(deletePost(post._id)),
+        handleDelete = () => { 
+            console.log('>>>DELET', post._id);
+            dispatch(deletePost(post._id))},
         handleLike = () => dispatch(likePost(post._id));
 
     return (
         <Card className={classes.card}>
-            <CardMedia className={classes.media} image={`${post.selectFile}`} title={post.title} />
+            <CardMedia className={classes.media} image={`${post.selectFile}`} alt={post.title} title={post.title} component='div' />
             <div className={classes.overlay}>
                 <Typography variant='h6'>{post.creator} </Typography>
                 <Typography variant='body2'>{moment(post.createdAt).fromNow()}</Typography>
@@ -32,18 +34,14 @@ export const Post = ({post, setCurrentId}) => {
             </div>
             <Typography className={classes.title} variant='h5' gutterBottom >{post.title}</Typography>
             <CardContent>
+                {console.log('>>>>>>>', post.message)}
                 <Typography variant='body2' color='textSecondary' component='p' >{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
-                <Button color='primary' size='small' onClick={handleLike} >
-                    <ThumbUpAltIcon fontSize='default' />
-                    &nbsp; Like &nbsp;
+                <Button color='primary' size='small' onClick={handleLike} startIcon={<ThumbUpAltIcon />}>
                     {post.likeCount}
                 </Button>
-                <Button color='primary' size='small' onClick={handleDelete} >
-                    <DeleteIcon fontSize='default' />
-                    &nbsp; Delete
-                </Button>
+                <Button color='secondary' size='small' onClick={handleDelete} startIcon={<DeleteIcon />} />
             </CardActions>
         </Card>
     )
