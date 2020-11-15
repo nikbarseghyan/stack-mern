@@ -27,7 +27,7 @@ $ yarn run eject
 
 ## Deploy
 
-[Heroku Deploy Server](https://cr-task.herokuapp.com/)
+[Heroku Deploy Server](https://cr-task.herokuapp.com/)<br />
 [Netlify Deploy Client](https://5fb18b89f58291ff4f799176--cr-task.netlify.app/)
 
 
