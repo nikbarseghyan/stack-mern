@@ -11,7 +11,7 @@ app.use(bodyParser.json({limit: '22mb', extended: true}))
 app.use(bodyParser.urlencoded({limit: '22mb', extended: true}))
 app.use(cors())
 app.use('/post', postRouter)
-app.use('/', (req,res) => res.send(`Create Task`))
+app.use('/', (req, res) => res.send(`Create Task`))
 
 mongoose.connect(M_DB_URL, M_OPTION)
     .then(() => app.listen(PORT, () => console.log(`Server is running, ${PORT}`)))
