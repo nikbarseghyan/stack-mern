@@ -34,7 +34,6 @@ export const Post = ({post, setCurrentId}) => {
             </div>
             <Typography className={classes.title} variant='h5' gutterBottom >{post.title}</Typography>
             <CardContent>
-                {console.log('>>>>>>>', post.message)}
                 <Typography variant='body2' color='textSecondary' component='p' >{post.message}</Typography>
             </CardContent>
             <CardActions className={classes.cardActions}>
